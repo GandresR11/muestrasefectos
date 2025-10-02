@@ -208,3 +208,231 @@ body {
     border: 3px dashed var(--secondary-color);
     background-color: #1a0f1d;
 }
+/* --- 06. Botón con Desplazamiento de Sombra (Glitch) --- */
+.shadow-glitch-btn {
+    background: #470d9a;
+    color: #fff;
+    border: none;
+    box-shadow: 
+        5px 5px 0 0 #ff007f, /* Sombra principal */
+        -5px -5px 0 0 #00e5ff; /* Sombra secundaria */
+    transition: all 0.3s ease-in-out;
+}
+
+.shadow-glitch-btn:hover {
+    box-shadow: 
+        2px 2px 0 0 #ff007f, /* Movimiento sutil al pasar el mouse */
+        -2px -2px 0 0 #00e5ff;
+    transform: translate(-1px, -1px); /* Mueve el botón para compensar */
+}
+
+/* --- 07. Botón que se Expande al Centro (Pulse Out) --- */
+.center-expand-btn {
+    background: #ffc107;
+    color: #333;
+    z-index: 1;
+}
+
+.center-expand-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: #e91e63;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+    z-index: -1;
+}
+
+.center-expand-btn:hover::before {
+    width: 300px; /* Tamaño que garantiza que cubra el botón */
+    height: 300px;
+}
+
+.center-expand-btn:hover {
+    color: #fff;
+}
+
+/* --- 08. Botón con Efecto de Ondas (Ripple Effect) --- */
+/* (El efecto visual de la onda se maneja principalmente con JS y el estilo 'ripple' abajo) */
+.ripple-btn {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    overflow: hidden; /* Muy importante para que la onda no se salga */
+}
+
+/* Estilo para el elemento creado por JS */
+.ripple-btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple-anim 0.6s linear;
+    background-color: rgba(255, 255, 255, 0.7); /* Color de la onda */
+}
+
+@keyframes ripple-anim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* --- 09. Botón con Borde que Dibuja (Drawing Border) --- */
+.border-draw-btn {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    position: relative;
+    z-index: 1;
+}
+
+.border-draw-btn::before, .border-draw-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.border-draw-btn::before { left: 0; top: 0; }
+.border-draw-btn::after { right: 0; top: 0; }
+
+.border-draw-btn:hover::before, .border-draw-btn:hover::after {
+    width: 50%; /* Se encuentran en el centro */
+}
+
+.border-draw-btn:hover {
+    color: var(--bg-color);
+}
+
+/* --- 10. Botón de Cambios de Color Rápido (Holographic Shift) --- */
+@keyframes holo-shift {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+.holo-shift-btn {
+    background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc);
+    color: #fff;
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    animation: none;
+}
+
+.holo-shift-btn:hover {
+    animation: holo-shift 1.5s linear infinite; /* Animación de cambio de tono */
+    box-shadow: 0 0 25px rgba(255, 0, 150, 0.8);
+    transform: scale(1.05);
+}
+
+/* --- 11. Botón con Desplazamiento de Texto Vertical (Slide) --- */
+.text-slide-btn {
+    background: #212529;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 0;
+    line-height: 40px; /* Controla la altura de las spans */
+    height: 40px; /* Altura fija para el contenedor 'a' */
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.text-slide-btn .text-top, .text-slide-btn .text-bottom {
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.text-slide-btn .text-bottom {
+    transform: translateY(100%); /* Posiciona el segundo texto fuera de la vista */
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.text-slide-btn:hover .text-top {
+    transform: translateY(-100%);
+}
+
+.text-slide-btn:hover .text-bottom {
+    transform: translateY(0);
+}
+
+/* --- 12. Botón con Filtro Blur y Enfoque (Focus Blur) --- */
+.focus-blur-btn {
+    background: #795548;
+    color: #fff;
+    border: none;
+    filter: blur(2px);
+    transition: filter 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.focus-blur-btn:hover {
+    filter: blur(0);
+    transform: scale(1.1);
+}
+
+/* --- 13. Botón de Efecto "Caja Abierta" (Box Open) --- */
+.box-open-btn {
+    background: #009688;
+    color: #fff;
+    z-index: 1;
+    border: none;
+}
+
+.box-open-btn::before, .box-open-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px; /* Grosor de la tapa */
+    background: var(--bg-color);
+    transition: width 0.3s ease-in-out;
+    z-index: 2;
+}
+
+.box-open-btn::before { top: 0; left: 0; }
+.box-open-btn::after { bottom: 0; right: 0; }
+
+.box-open-btn:hover::before, .box-open-btn:hover::after {
+    width: 100%;
+}
+
+/* --- 14. Botón con Icono Rotatorio --- */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.icon-rotate-btn {
+    background: #e91e63;
+    color: #fff;
+    border: none;
+}
+
+.icon-rotate-btn .rotate-icon {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.icon-rotate-btn:hover .rotate-icon {
+    animation: spin 1s linear infinite; /* Animación de rotación */
+}
+
+/* --- 15. Botón con Borde Múltiple (Layered Border) --- */
+.layered-border-btn {
+    background: #3f51b5;
+    color: #fff;
+    border: 3px solid #6c7ff5;
+    box-shadow: 0 0 0 5px #c3ccff; /* Segundo borde como sombra */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.layered-border-btn:hover {
+    border-color: #ff9800; /* Cambio de color de borde */
+    box-shadow: 0 0 0 5px #ffc107; /* Cambio de color de la capa externa */
+    transform: scale(1.03);
+}
