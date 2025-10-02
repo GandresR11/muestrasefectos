@@ -87,3 +87,48 @@ const rippleBtn = document.querySelector('.ripple-btn');
 if (rippleBtn) {
     rippleBtn.addEventListener('click', createRipple);
 }
+// --- JS para Pop-ups y Modales ---
+document.addEventListener('DOMContentLoaded', () => {
+    // ... (Mantén tu código JS anterior aquí, como el createRipple y IntersectionObserver)
+
+    // Función principal para manejar la apertura y cierre de diálogos
+    const openBtns = document.querySelectorAll('.open-dialog-btn');
+    const closeBtns = document.querySelectorAll('.close-dialog-btn');
+    const dialogContainers = document.querySelectorAll('.dialog-container');
+
+    // 1. Abrir Diálogo
+    openBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const targetSelector = e.currentTarget.getAttribute('data-dialog-target');
+            const targetDialog = document.querySelector(targetSelector);
+            
+            if (targetDialog) {
+                targetDialog.classList.add('open');
+                // Evita que el scroll de la página mueva el contenido bajo el modal
+                document.body.style.overflow = 'hidden'; 
+            }
+        });
+    });
+
+    // 2. Cerrar Diálogo (Botón dentro del contenido)
+    closeBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const dialog = e.currentTarget.closest('.dialog-container');
+            if (dialog) {
+                dialog.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    // 3. Cerrar Modal al hacer clic fuera del contenido (Solo aplica a Modales)
+    dialogContainers.forEach(container => {
+        container.addEventListener('click', (e) => {
+            // Verifica si el clic ocurrió directamente sobre el contenedor (el fondo)
+            if (e.target.classList.contains('modal-container')) {
+                e.target.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+});
