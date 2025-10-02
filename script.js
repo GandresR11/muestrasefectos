@@ -57,3 +57,33 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 });
+// --- JS para la Muestra 08: Efecto Ripple ---
+function createRipple(event) {
+    const button = event.currentTarget;
+    
+    // Crear el elemento de onda (ripple)
+    const circle = document.createElement('span');
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+
+    // Calcular la posición del clic
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - (button.getBoundingClientRect().left + radius)}px`;
+    circle.style.top = `${event.clientY - (button.getBoundingClientRect().top + radius)}px`;
+    
+    circle.classList.add('ripple');
+
+    // Asegurarse de que solo haya una onda activa a la vez
+    const ripple = button.getElementsByClassName('ripple')[0];
+    if (ripple) {
+        ripple.remove();
+    }
+
+    button.appendChild(circle);
+}
+
+// Añadir el listener al botón Ripple
+const rippleBtn = document.querySelector('.ripple-btn');
+if (rippleBtn) {
+    rippleBtn.addEventListener('click', createRipple);
+}
